@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(pkill:*)",
+      "Bash(timeout 10s npm run start)",
+      "Bash(ls:*)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": []
+  }
+}

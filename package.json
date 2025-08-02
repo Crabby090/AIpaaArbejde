@@ -1,0 +1,28 @@
+{
+  "name": "ai-paa-arbejde-website",
+  "version": "1.0.0",
+  "description": "Website for the book 'AI på Arbejde'",
+  "main": "index.html",
+  "scripts": {
+    "start": "node -e \"require('http').createServer((req,res)=>{const path=require('path'),fs=require('fs'),url=decodeURIComponent(req.url==='/'?'/index.html':req.url),file=path.join(__dirname,url);fs.readFile(file,(err,data)=>{if(err){res.writeHead(404);res.end('Not found');return;}const ext=path.extname(file).toLowerCase();const mimes={'.html':'text/html','.css':'text/css','.js':'application/javascript','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png'};res.writeHead(200,{'Content-Type':mimes[ext]||'text/plain'});res.end(data);});}).listen(8000,()=>console.log('Server running at http://localhost:8000'));\"",
+    "serve": "npm run start",
+    "dev": "npm run start",
+    "build": "node -e \"const fs=require('fs'),path=require('path');if(!fs.existsSync('dist'))fs.mkdirSync('dist');['index.html','_redirects'].concat(fs.readdirSync('.').filter(f=>f.endsWith('.JPG')||f.endsWith('.png'))).forEach(f=>fs.copyFileSync(f,path.join('dist',f)));['styles','scripts'].forEach(d=>{if(fs.existsSync(d)){const distDir=path.join('dist',d);if(!fs.existsSync(distDir))fs.mkdirSync(distDir);fs.readdirSync(d).forEach(f=>fs.copyFileSync(path.join(d,f),path.join(distDir,f)));}});console.log('Build completed');\"",
+    "clean": "node -e \"const fs=require('fs'),path=require('path');function rmrf(dir){if(fs.existsSync(dir)){fs.readdirSync(dir).forEach(f=>{const curPath=path.join(dir,f);fs.lstatSync(curPath).isDirectory()?rmrf(curPath):fs.unlinkSync(curPath);});fs.rmdirSync(dir);}}rmrf('dist');console.log('Cleaned');\""
+  },
+  "keywords": [
+    "ai",
+    "arbejde",
+    "book",
+    "website",
+    "danish"
+  ],
+  "author": "C Hendriksen, M Friis Hau, S Zambach",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
